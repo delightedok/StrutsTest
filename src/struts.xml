@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
+	
+	<package name="default" extends="struts-default">
+		<action name="views-typeconvert-*" class="com.tamgitsun.struts2.typeconvert.ToInputAction">
+			<result name="success">/WEB-INF/views/typeconvert/{1}.jsp</result>
+		</action>
+		<action name="typeconvert-login" class="com.tamgitsun.struts2.typeconvert.LoginAction">
+			<result name="success">/WEB-INF/success.html</result>
+		</action>
+	</package>
+	
+</struts>
