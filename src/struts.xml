@@ -10,8 +10,9 @@
 		<action name="views-typeconvert-*" class="com.tamgitsun.struts2.typeconvert.ToInputAction">
 			<result name="success">/WEB-INF/views/typeconvert/{1}.jsp</result>
 		</action>
-		<action name="typeconvert-login" class="com.tamgitsun.struts2.typeconvert.LoginAction">
+		<action name="typeconvert-*" class="com.tamgitsun.struts2.typeconvert.LoginAction" method="{1}">
 			<result name="success">/WEB-INF/success.html</result>
+			<result name="error">/WEB-INF/error.html</result>
 		</action>
 	</package>
 	
