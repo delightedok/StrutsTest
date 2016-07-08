@@ -40,5 +40,13 @@
 	</tr>
 </s:form>
 
+<s:form action="typeconvert-login_converter">
+	<s:textfield name="userc" label="username-password"></s:textfield>
+	<tr>
+		<td colspan="2"><s:submit value="convert" theme="simple"></s:submit></td>
+		<s:reset value="reset" theme="simple"></s:reset>
+	</tr>
+</s:form>
+
 </body>
 </html>

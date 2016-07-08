@@ -2,6 +2,7 @@ package com.tamgitsun.struts2.typeconvert;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.opensymphony.xwork2.Action;
 
@@ -9,8 +10,10 @@ public class LoginAction implements Action{
 	
 	private User user;
 	private String tip;
-	private Map<String,User> users;
-	private List<User> usersl;
+	private Map users;
+	private List usersl;
+	private User userc;//调用UserConverter
+	private Set userss;
 	
 	public void setUser(User user){
 		this.user=user;
@@ -18,11 +21,17 @@ public class LoginAction implements Action{
 	public void setTip(String tip){
 		this.tip=tip;
 	}
-	public void setUsers(Map<String,User> users){
+	public void setUsers(Map users){
 		this.users=users;
 	}
-	public void setUsersl(List<User> usersl){
+	public void setUsersl(List usersl){
 		this.usersl=usersl;
+	}
+	public void setUserc(User userc){
+		this.userc=userc;
+	}
+	public void setUserss(Set userss){
+		this.userss=userss;
 	}
 	
 	public User getUser(){
@@ -31,11 +40,17 @@ public class LoginAction implements Action{
 	public String getTip(){
 		return tip;
 	}
-	public Map<String,User> getUsers(){
+	public Map getUsers(){
 		return users;
 	}
-	public List<User> getUsersl(){
+	public List getUsersl(){
 		return usersl;
+	}
+	public User getUserc(){
+		return userc;
+	}
+	public Set getUserss(){
+		return userss;
 	}
 	
 	public String execute() throws Exception{
@@ -43,14 +58,19 @@ public class LoginAction implements Action{
 	}
 	
 	public String login() throws Exception{
-		System.out.println("username:"+user.getName());
-		System.out.println("password:"+user.getPass());
-		return "success";
+		if(getUser().getName().equals("tamgitsun")&&getUser().getPass().equals("123456")){
+			setTip("登录成功");
+			return "success";
+		}else{
+			setTip("登录失败");
+			return "error";
+		}
 	}
 	
 	public String login_map() throws Exception{
 		System.out.println(getUsers());
-		if(getUsers().get("one").getName().equals("tamgitsun")&&getUsers().get("one").getPass().equals("123456")){
+		User u=(User)getUsers().get("one");
+		if(u.getName().equals("tamgitsun")&&u.getPass().equals("123456")){
 			setTip("登录成功");
 			return "success";
 		}else{
@@ -61,7 +81,7 @@ public class LoginAction implements Action{
 	
 	public String login_list() throws Exception{
 		System.out.println(getUsersl());
-		User u=getUsersl().get(0);
+		User u=(User)getUsersl().get(0);
 		if(u.getName().equals("tamgitsun")&&u.getPass().equals("123456")){
 			setTip("登录成功");
 			return "success";
@@ -69,6 +89,20 @@ public class LoginAction implements Action{
 			setTip("登录失败");
 			return "error";
 		}
+	}
+	
+	public String login_converter() throws Exception{
+		if(getUserc().getName().equals("tamgitsun")&&getUserc().getPass().equals("123456")){
+			setTip("登录成功");
+			return "success";
+		}else{
+			setTip("登录失败");
+			return "error";
+		}
+	}
+	
+	public String login_set() throws Exception{
+		return "success";
 	}
 	
 }
