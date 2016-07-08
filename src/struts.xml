@@ -18,6 +18,10 @@
 			<result name="success">/WEB-INF/success.html</result>
 			<result name="error">/WEB-INF/error.html</result>
 		</action>
+		<action name="Validate2" class="com.tamgitsun.struts2.validate.Validate2Action">
+			<result name="input">/WEB-INF/views/validate/regist.jsp</result>
+			<result name="success">/WEB-INF/success.html</result>
+		</action>
 	</package>
 	
 </struts>

@@ -6,19 +6,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>Insert title here</title>
+<s:head/>
 </head>
 <body>
 
-<s:fielderror></s:fielderror>
-
-<form method="post" action="Validate2">
-	username:<input type="text" name="username" />
-	pass&nbsp;word:<input type="password" name="password" />
-	age:<input type="text" name="age" />
-	birthday:<input type="text" name="birthday" />
-	<input type="submit" value="sign up" />
-</form>
-
+<s:form action="Validate2" validate="true">
+	<s:textfield label="username" name="username"></s:textfield>
+	<s:password label="password" name="password"></s:password>
+	<s:textfield label="age" name="age"></s:textfield>
+	<s:textfield label="birthday" name="birthday"></s:textfield>
+	<s:submit></s:submit>
+</s:form>
 
 </body>
 </html>
