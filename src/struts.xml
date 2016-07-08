@@ -7,10 +7,14 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
 	
 	<package name="default" extends="struts-default">
-		<action name="views-typeconvert-*" class="com.tamgitsun.struts2.typeconvert.ToInputAction">
-			<result name="success">/WEB-INF/views/typeconvert/{1}.jsp</result>
+		<action name="views-*-*" class="com.tamgitsun.struts2.typeconvert.ToInputAction">
+			<result name="success">/WEB-INF/views/{1}/{2}.jsp</result>
 		</action>
 		<action name="typeconvert-*" class="com.tamgitsun.struts2.typeconvert.LoginAction" method="{1}">
+			<result name="success">/WEB-INF/success.html</result>
+			<result name="error">/WEB-INF/error.html</result>
+		</action>
+		<action name="input" class="com.tamgitsun.struts2.validate.ValidateAction">
 			<result name="success">/WEB-INF/success.html</result>
 			<result name="error">/WEB-INF/error.html</result>
 		</action>
