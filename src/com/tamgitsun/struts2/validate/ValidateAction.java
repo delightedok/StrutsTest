@@ -13,6 +13,14 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ValidateAction extends ActionSupport{
 	
+	private String errTip;
+	public void setErrTip(String errTip){
+		this.errTip=errTip;
+	}
+	public String getErrTip(){
+		return errTip;
+	}
+	
 	public String execute() throws Exception{
 		
 		HttpServletRequest request=ServletActionContext.getRequest();
@@ -32,11 +40,11 @@ public class ValidateAction extends ActionSupport{
 		}else if(!Pattern.matches("\\w{4,25}", password.trim())){
 			errStr+="\nyour password should be number or letter,and it should be longer than 4 and shorter than 25";
 		}
+		int agei=0;
 		if(age.trim().equals("")||age==null){
 			errStr+="\nyour age can't be blank";
 		}else{
 			try{
-				int agei=0;
 				agei=Integer.parseInt(age);
 				if(agei>150&&agei<=0){
 					errStr+="\nyour age is invalidate";
@@ -45,11 +53,11 @@ public class ValidateAction extends ActionSupport{
 				errStr+="\nyour age should be a Integer";
 			}
 		}
+		SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-DD");
+		Date birth=null;
 		if(birthday.trim().equals("")||birthday==null){
 			errStr+="\nyour birthday can't be blank";
 		}else{
-			SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-DD");
-			Date birth=null;
 			try{
 				birth=(Date)sdf.parse(birthday);
 				if(birth.after(sdf.parse("2050-02-21"))||birth.before(sdf.parse("1900-01-01"))){
@@ -60,7 +68,16 @@ public class ValidateAction extends ActionSupport{
 			}
 		}
 		
-		return SUCCESS;
+		if(errStr==""){
+			setErrTip("");
+			UserBean user=new UserBean(username,password,agei,birth);
+			return SUCCESS;
+		}else{
+			setErrTip(errStr);
+			System.out.println(errStr);
+			return ERROR;
+		}
+		
 	}
 
 }
