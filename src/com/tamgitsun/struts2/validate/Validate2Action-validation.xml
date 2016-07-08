@@ -10,7 +10,7 @@
 	
 <validators>
 	<field name="username">
-		<field-validator type="requiredstring">
+		<field-validator type="requiredstring" short-circuit="true">
 			<param name="trim">true</param>
 			<message>must input username</message>
 		</field-validator>

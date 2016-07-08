@@ -40,5 +40,15 @@ public class Validate2Action extends ActionSupport{
 	public String execute() throws Exception{
 		return SUCCESS;
 	}
+/*
+	public void validate(){//手动完成输入校验
+		addFieldError("user","your username must....");//设置FieldError属性的值,可传递到最终的视图中显示
+	}
+	
+	public void validateXxx(){//struts.xml中需加入<action name="***" class="org.crazyit.app.action.RegistAction" method="xxx">
 
+		addFieldError("user","your username must....");
+	}
+	*/
+	
 }
