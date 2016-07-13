@@ -7,6 +7,29 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
 	
 	<package name="default" extends="struts-default">
+		<interceptors>
+			<interceptor name="timer" class="com.tamgitsun.struts2.interceptor.filter.Timer">
+				<param name="year">2016</param>
+				<param name="month">7</param>
+				<param name="day">13</param>
+			</interceptor>
+			<interceptor name="logger" class="com.tamgitsun.struts2.interceptor.filter.Logger"></interceptor>
+			<interceptor name="methodFilter" class="com.tamgitsun.struts2.interceptor.filter.MethodFilter"></interceptor>
+			<interceptor name="auth" class="com.tamgitsun.struts2.interceptor.filter.AuthenticationInterceptor"></interceptor>
+			<interceptor-stack name="myinterceptor">
+				<interceptor-ref name="timer"></interceptor-ref>
+				<interceptor-ref name="logger"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="auth"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="defaultStack"></default-interceptor-ref>
+	
+		<global-results>
+			<result name="login">/WEB-INF/views/interceptor/login.jsp</result>
+		</global-results>
+		
 		<action name="views-*-*" class="com.tamgitsun.struts2.typeconvert.ToInputAction">
 			<result name="success">/WEB-INF/views/{1}/{2}.jsp</result>
 		</action>
@@ -21,6 +44,31 @@
 		<action name="Validate2" class="com.tamgitsun.struts2.validate.Validate2Action">
 			<result name="input">/WEB-INF/views/validate/regist.jsp</result>
 			<result name="success">/WEB-INF/success.html</result>
+		</action>
+		<action name="login" class="com.tamgitsun.struts2.interceptor.DoLoginAction">
+			<interceptor-ref name="timer"></interceptor-ref>
+			<interceptor-ref name="logger"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success">/WEB-INF/success.html</result>
+			<result name="login">/WEB-INF/views/interceptor/login.jsp</result>
+		</action>
+		<action name="methodfilter" class="com.tamgitsun.struts2.interceptor.DoMethodFilterAction">
+			<interceptor-ref name="methodFilter">
+				<param name="excludeMethods">input,back,cancel</param>
+				<param name="includeMethods">execute</param>
+			</interceptor-ref>
+			<result name="success">/WEB-INF/views/interceptor/MethodFilter.jsp</result>
+		</action>
+		<action name="login2" class="com.tamgitsun.struts2.interceptor.LoginAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="token"></interceptor-ref>
+			<result>/WEB-INF/views/interceptor/success.jsp</result>
+			<result name="invalid.token">/WEB-INF/wrong.jsp</result>
+			<result name="input">/WEB-INF/views/interceptor/login.jsp</result>
+		</action>
+		<action name="resource">
+			<result>/WEB-INF/resource.jsp</result>
+			<interceptor-ref name="auth"></interceptor-ref>
 		</action>
 	</package>
 	
