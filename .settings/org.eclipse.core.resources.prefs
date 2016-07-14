@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/views/ajax/index.jsp=UTF-8
 encoding//src/com/tamgitsun/struts2/interceptor/filter/Logger.java=UTF-8
 encoding//src/com/tamgitsun/struts2/interceptor/filter/MethodFilter.java=UTF-8
 encoding//src/com/tamgitsun/struts2/typeconvert/LoginAction.java=UTF-8
